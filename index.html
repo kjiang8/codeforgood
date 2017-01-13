@@ -28,8 +28,25 @@ rootRef.on("value", function(snapshot){
   console.log(dataRef); //weird thing
   console.log(dataKey); //null
   */ 
+
+
 });
 
+function addVolunteer(uid, username, firstName, lastName) {
+  // A post entry.
+  var postData = {
+    name: firstName + " " + lastName,
+    eventsVolunteered: 0,
+    username: username,
+  };
+
+  var updates = {};
+  updates['/volunteers/' + uid] = postData;
+
+  return firebase.database().ref().update(updates);
+}
+
+addVolunteer('00000','jsmith','john','smith');
 
 </script>
 
