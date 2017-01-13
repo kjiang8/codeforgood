@@ -1,0 +1,61 @@
+<html ng-app="myApp">
+  <head>
+    <title>Alzheimer's Association</title>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+  var config = {
+    apiKey: "AIzaSyB9MrLpsxRzKq1VzCbA1T-6Yi6raHIxiM0",
+    authDomain: "code-for-good-35ef5.firebaseapp.com",
+    databaseURL: "https://code-for-good-35ef5.firebaseio.com",
+    //storageBucket: "<BUCKET>.appspot.com",
+    //messagingSenderId: "<SENDER_ID>",
+  };
+  firebase.initializeApp(config);
+  
+  var rootRef = firebase.database().ref();
+console.log('rootRef');
+console.log(rootRef);
+
+  /*
+      rootRef.on('value', showItems);
+      console.log('thing');
+
+      function showItems(snapshot){
+          //gets data in database as a list
+          console.log('snapshot');
+          var data = snapshot.val();
+          console.log(data);
+          console.log("TEST");
+          console.log(snapshot);
+
+      } */
+
+rootRef.on("value", function(snapshot){
+  console.log(snapshot.val());
+  console.log('snapshot');
+  var dataRef = snapshot.ref;
+  console.log(dataRef);
+  var dataKey = snapshot.key;
+  console.log(dataKey);
+});
+
+function writeDB(userID, name){
+  firebase.database().ref('users/' + userID).set({
+    username: name
+  });
+}
+
+writeDB('1', 'kat');
+
+</script>
+
+
+</head>
+<body>
+<p>Hello World</p>
+</body>
+
+</html>
