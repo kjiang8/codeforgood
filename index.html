@@ -59,10 +59,11 @@ function addVolunteer(uid, username, firstName, lastName) {
   First Name: <input type="text" name="firstName"><br>
   Last Name: <input type="text" name="lastName"><br>
   Username: <input type="text" name="username"><br>
+  <!-- Password to be Implemented -->
   Password: <input type="text" name="password"><br>
   <button name="sub">Submit</button>
 
-  <h2>Forgot your username or password? Enter your email address here: <input type="text" name="primaryEmail"><br></h2>
+  <h3>Forgot your username or password? Enter your email address here: <input type="text" name="primaryEmail"><br></h3>
 
 </body>
 
@@ -71,6 +72,7 @@ $('[name="sub"]').click(function() {
   var firstName = $("input[name='firstName']").val();
   var lastName = $("input[name='lastName']").val();
   var username = $("input[name='username']").val();
+  // Better userID generation to be Implemented
   var userID =  Math.floor(Math.random()*10000).toString();
   addVolunteer(userID, firstName, lastName, username );
 });
