@@ -36,7 +36,8 @@
 function addVolunteer(uid, username, firstName, lastName) {
   // A post entry.
   var postData = {
-    name: firstName + " " + lastName,
+    firstName: firstName,
+    lastName: lastName,
     eventsVolunteered: 0,
     username: username,
   };
