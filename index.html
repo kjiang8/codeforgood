@@ -73,8 +73,8 @@ $('[name="sub"]').click(function() {
   var lastName = $("input[name='lastName']").val();
   var username = $("input[name='username']").val();
   // Better userID generation to be Implemented
-  var userID =  Math.floor(Math.random()*10000).toString();
-  addVolunteer(userID, firstName, lastName, username );
+  var userID =  Math.floor(Math.random()*100000).toString();
+  addVolunteer(userID, username, firstName, lastName);
 });
 </script>
 
