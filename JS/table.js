@@ -18,6 +18,7 @@ rootRef.on("value", function(snapshot){
 
 	$.each(data.volunteers, function(key, value){
 		table += '<tr>';
+		table += '<td>' + key + '</td>';
 		table += '<td>' + value.firstName + '</td>';
 		table += '<td>' + value.lastName + '</td>';
 		table += '<td>' + value.homeCity + '</td>';
