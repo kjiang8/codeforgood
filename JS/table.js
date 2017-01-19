@@ -1,12 +1,23 @@
-/**
-*   I don't recommend using this plugin on large tables, I just wrote it to make the demo useable. It will work fine for smaller tables 
-*   but will likely encounter performance issues on larger tables.
-*
-*		<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
-*		$(input-element).filterTable()
-*		
-*	The important attributes are 'data-action="filter"' and 'data-filters="#table-selector"'
-*/
+var config = {
+    apiKey: "AIzaSyB9MrLpsxRzKq1VzCbA1T-6Yi6raHIxiM0",
+    authDomain: "code-for-good-35ef5.firebaseapp.com",
+    databaseURL: "https://code-for-good-35ef5.firebaseio.com",
+    //storageBucket: "<BUCKET>.appspot.com",
+    //messagingSenderId: "<SENDER_ID>",
+  };
+  firebase.initializeApp(config);
+
+  var rootRef = firebase.database().ref();
+
+  rootRef.on("value", function(snapshot){
+
+  data = snapshot.val(); //data is updated every time the db changes
+  //console.log(data);
+  //console.log(data.volunteers.sample.name);
+
+});
+
+
 (function(){
     'use strict';
 	var $ = jQuery;
@@ -21,7 +32,7 @@
                         $target = $(target), 
                         $rows = $target.find('tbody tr');
                         
-					if(search === '') {
+					if(search == '') {
 						$rows.show(); 
 					} else {
 						$rows.each(function(){
@@ -54,5 +65,87 @@ $(function(){
 			$panel.find('.panel-body input').focus();
 		}
 	});
-	$('[data-toggle="tooltip"]').tooltip();
+	//$('[data-toggle="tooltip"]').tooltip();
 })
+
+//upload part
+
+var fileContents ="";
+
+window.onload = function() {
+		var fileInput = document.getElementById('fileInput');
+		var fileDisplayArea = document.getElementById('fileContents');
+
+		fileInput.addEventListener('change', function(e) {
+			var file = fileInput.files[0];
+			var textType = /text.*/;
+
+			if (file.type.match(textType)) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					fileContents = reader.result
+					fileDisplayArea.innerText = fileContents;
+				}
+
+				reader.readAsText(file);	
+			} else {
+				fileDisplayArea.innerText = "File not supported!"
+			}
+		});
+}
+
+function upload(){
+	fileArray = fileContents.split('\n');
+
+	var updates = {}
+
+	for (i=1; i < fileArray.length ;i++){ //ignores first row
+		var row = fileArray[i].split(',');
+
+		var date = row[0];
+		var lastName = row[1];
+		var firstName = row[2];
+		var address1 = row[3];
+		var address2 = row[4];
+		var city = row[5];
+		var state = row[6];
+		var zip = row[7];
+		var country = row[8];
+		var email = row[9];
+		var phone = row[10];
+
+		if (row[10]==="\r"){ //replaces carriage returns
+			phone = ""
+		}
+
+		var postData = {
+		    dateSubmitted: date,
+		    firstName: firstName,
+		    lastName: lastName,
+		    address1: address1,
+		    address2: address2,
+		    homeCity: city,
+		    homeState: state,
+		    homeCountry: country,
+		    email: email,
+		    phone: phone,
+		    eventsVolunteered: 0,
+		    
+	  	};
+
+	  	//console.log(postData);
+
+	  	var uid =  Math.floor(Math.random()*1000000).toString();
+	  	
+	  	updates['/volunteers/' + uid] = postData;
+	  	
+	}
+
+	return firebase.database().ref().update(updates);
+	$('#status').text('Success!');
+	location.reload();
+
+}
+
+
