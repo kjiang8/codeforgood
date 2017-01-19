@@ -1,10 +1,24 @@
-<html ng-app="myApp">
-  <head>
-    <title>Alzheimer's Association</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-<script>
+  <title>Alzheimer's Association Volunteer Sign In</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Custom styles for this template -->
+  <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+  <script>
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyB9MrLpsxRzKq1VzCbA1T-6Yi6raHIxiM0",
@@ -14,70 +28,175 @@
     //messagingSenderId: "<SENDER_ID>",
   };
   firebase.initializeApp(config);
-
   var rootRef = firebase.database().ref();
-
   rootRef.on("value", function(snapshot){
+    //document.write(snapshot.val()); //displays [object Object]
+    console.log(snapshot.val());
+    /*
+    var dataRef = snapshot.ref;
+    var dataKey = snapshot.key;
+    console.log(dataRef); //weird thing
+    console.log(dataKey); //null
+    */
+  });
+  function addVolunteer(uid, firstName, lastName,
+    address1, address2, city, state, zipCode, country,
+    primaryPhone, username, emailAddress, password,
+    repeatPassword) {
+    var postData = {
+      firstName: firstName,
+      lastName: lastName,
+      address1: address1,
+      address2: address2,
+      city: city,
+      state: state,
+      zipCode: zipCode,
+      country: country,
+      primaryPhone: primaryPhone,
+      username: username,
+      emailAddress: emailAddress,
+      password: password,
+      repeatPassword: repeatPassword,
+      eventsVolunteered: 0,
+    };
 
-  //document.write(snapshot.val()); //displays [object Object]
-  console.log(snapshot.val());
+    var updates = {};
+    updates['/volunteers/' + uid] = postData;
 
-
-  /*
-  var dataRef = snapshot.ref;
-  var dataKey = snapshot.key;
-  console.log(dataRef); //weird thing
-  console.log(dataKey); //null
-  */
-
-
-});
-
-function addVolunteer(uid, username, firstName, lastName) {
-  // A post entry.
-  var postData = {
-    firstName: firstName,
-    lastName: lastName,
-    eventsVolunteered: 0,
-    username: username,
-  };
-
-  var updates = {};
-  updates['/volunteers/' + uid] = postData;
-
-  return firebase.database().ref().update(updates);
-}
-// addVolunteer('00000','jsmith','john','smith');
-
-</script>
-
-
+    return firebase.database().ref().update(updates);
+  }
+  // addVolunteer('00000','jsmith','john','smith');
+  </script>
 </head>
+
 <body>
 
-  <h1> Login Or Create New Account </h1>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Alzheimer's Association Volunteer Database</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="http://www.alz.org/manh/">About the Alzheimer's Association</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
 
-  First Name: <input type="text" name="firstName"><br>
-  Last Name: <input type="text" name="lastName"><br>
-  Username: <input type="text" name="username"><br>
-  <!-- Password to be Implemented -->
-  Password: <input type="text" name="password"><br>
-  <button name="sub">Submit</button>
+  <div class="container">
 
-  <h3>Forgot your username or password? Enter your email address here: <input type="text" name="primaryEmail"><br></h3>
+    <div class="row">
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Login</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Forgot Password?</button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <form class="form-newaccount">
+      <h2 class="form-newaccount-heading">Create New Account</h2>
+
+      <div class="form-group">
+
+        <label>Last Name</label>
+        <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+
+        <label>First Name </label>
+        <input type="text" class="form-control" id="firstName" placeholder="First Name">
+
+        <label>Address 1</label>
+        <input type="text" class="form-control" id="address1" placeholder="Address 1">
+
+        <label>Address 2</label>
+        <input type="text" class="form-control" id="address2" placeholder="Address 2">
+
+        <label>City</label>
+        <input type="text" class="form-control" id="city" placeholder="City">
+
+        <label>State</label>
+        <input type="text" class="form-control" id="state" placeholder="State">
+
+        <label>Zip Code</label>
+        <input type="number" class="form-control" id="zipCode" placeholder="Zip Code">
+
+        <label>Country</label>
+        <input type="text" class="form-control" id="country" placeholder="Country">
+
+        <label>Primary Phone</label>
+        <input type="tel" class="form-control" id="primaryPhone" placeholder="Primany Phone">
+
+        <label>Username</label>
+        <input type="text" class="form-control" id="username" placeholder="Username">
+
+        <label for="inputEmail">Email Address</label>
+        <input type="email" class="form-control" id="emailAddress" placeholder="Email Address">
+
+        <label for="inputPassword">Create Password</label>
+        <input type="password" id="password" class="form-control" placeholder="Create Password">
+
+        <label for="inputPassword">Confirm Password</label>
+        <input type="password" id="repeatPassword" class="form-control" placeholder="Confirm Password">
+      </div>
+
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+    </form>
+    <button class="btn btn-lg btn-primary btn-block" name="sub">Submit</button>
+
+  </div> <!-- /container -->
 
 </body>
 
 <script>
 $('[name="sub"]').click(function() {
-  var firstName = $("input[name='firstName']").val();
-  var lastName = $("input[name='lastName']").val();
-  var username = $("input[name='username']").val();
-  // Better userID generation to be Implemented
-  var userID =  Math.floor(Math.random()*100000).toString();
-  addVolunteer(userID, username, firstName, lastName);
+  var firstName = $("#firstName").val();
+  var lastName = $("#lastName").val();
+  var address1 = $("#address1").val();
+  var address2 = $("#address2").val();
+  var city = $("#city").val();
+  var state = $("#state").val();
+  var zipCode = $("#zipCode").val();
+  var country = $("#country").val();
+  var primaryPhone = $("#primaryPhone").val();
+  var username = $("#username").val();
+  var emailAddress = $("#emailAddress").val();
+  var password = $("#password").val();
+  // NOTE: currently only updates element with uid==1
+  var uid =  Math.floor(Math.random()*100000).toString();
+  var uid = 1;
+  addVolunteer(uid, firstName, lastName,
+    address1, address2, city, state, zipCode, country,
+    primaryPhone, username, emailAddress, password,
+    repeatPassword);
 });
 </script>
-
 
 </html>
