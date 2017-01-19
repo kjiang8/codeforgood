@@ -1,3 +1,5 @@
+var data = {}
+
 var config = {
     apiKey: "AIzaSyB9MrLpsxRzKq1VzCbA1T-6Yi6raHIxiM0",
     authDomain: "code-for-good-35ef5.firebaseapp.com",
@@ -5,18 +7,31 @@ var config = {
     //storageBucket: "<BUCKET>.appspot.com",
     //messagingSenderId: "<SENDER_ID>",
   };
-  firebase.initializeApp(config);
 
-  var rootRef = firebase.database().ref();
+firebase.initializeApp(config);
 
-  rootRef.on("value", function(snapshot){
+var rootRef = firebase.database().ref();
+rootRef.on("value", function(snapshot){
 
   data = snapshot.val(); //data is updated every time the db changes
-  //console.log(data);
-  //console.log(data.volunteers.sample.name);
+	var table = "";
+
+	$.each(data.volunteers, function(key, value){
+		table += '<tr>';
+		table += '<td>' + value.firstName + '</td>';
+		table += '<td>' + value.lastName + '</td>';
+		table += '<td>' + value.homeCity + '</td>';
+		table += '<td>' + value.homeState + '</td>';
+		table += '<td>' + value.homeZip + '</td>';
+		table += '</tr>';
+	});
+
+	$('#table-body').append(table);
 
 });
 
+
+//creating the table :D
 
 (function(){
     'use strict';
@@ -68,7 +83,9 @@ $(function(){
 	//$('[data-toggle="tooltip"]').tooltip();
 })
 
-//upload part
+
+
+//uploading file part
 
 var fileContents ="";
 
@@ -128,6 +145,7 @@ function upload(){
 		    homeCity: city,
 		    homeState: state,
 		    homeCountry: country,
+		    homeZip: zip,
 		    email: email,
 		    phone: phone,
 		    eventsVolunteered: 0,
