@@ -137,26 +137,42 @@ function upload(){
 			phone = ""
 		}
 
-		var postData = {
-		    dateSubmitted: date,
-		    firstName: firstName,
-		    lastName: lastName,
-		    address1: address1,
+
+	  	var addressInfo = {
+	  		address1: address1,
 		    address2: address2,
 		    homeCity: city,
 		    homeState: state,
 		    homeCountry: country,
 		    homeZip: zip,
-		    email: email,
-		    phone: phone,
-		    eventsVolunteered: 0,
-		    
-	  	};
+	  	}
 
+	  	var contactInfo = {
+			primaryEmail: email,
+		    homePhone: phone,
+	  	}
+
+	  	var events = {
+	  		alzheimersWalk: {
+	  			position: 'volunteer',
+	  			hours: 8
+	  		}
+	  	}
 	  	//console.log(postData);
 
 	  	var uid =  Math.floor(Math.random()*1000000).toString();
 	  	
+	  	var postData = {
+	  		firstName: firstName,
+	  		lastName: lastName,
+	  		signedRelease: 'True',
+	  		dateSubmitted: date,
+	  		addressInfo: addressInfo,
+	  		contact: contactInfo,
+	  		events: events
+
+	  	}
+
 	  	updates['/volunteers/' + uid] = postData;
 	  	
 	}
@@ -166,5 +182,6 @@ function upload(){
 	location.reload();
 
 }
+
 
 
