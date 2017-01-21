@@ -11,10 +11,10 @@
   <title>Alzheimer's Association Volunteer Sign In</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- Custom styles for this template -->
-  <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
@@ -23,7 +23,73 @@
   <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
 
-  <script src="js/login.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB9MrLpsxRzKq1VzCbA1T-6Yi6raHIxiM0",
+    authDomain: "code-for-good-35ef5.firebaseapp.com",
+    databaseURL: "https://code-for-good-35ef5.firebaseio.com",
+    //storageBucket: "<BUCKET>.appspot.com",
+    //messagingSenderId: "<SENDER_ID>",
+  };
+  firebase.initializeApp(config);
+  var rootRef = firebase.database().ref();
+  rootRef.on("value", function(snapshot){
+    
+    //console.log(snapshot.val());
+
+  });
+
+
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: 'user-home.html',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+          //firebase.auth.TwitterAuthProvider.PROVIDER_ID, //not yet implemented in firebase console
+          //firebase.auth.GithubAuthProvider.PROVIDER_ID, //not yet implemented in firebase console
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        //tosUrl: 'www.google.com'
+      };
+
+      var uiConfigCustom = {
+        signInSuccessUrl: 'user-home.html',
+        signInOptions: [
+          {
+            provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            scopes: [
+              'https://www.googleapis.com/auth/plus.login'
+            ]
+          },
+          {
+            provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+            scopes: [
+              'public_profile',
+              'email',
+              'user_likes',
+              'user_friends'
+            ]
+          },
+          firebase.auth.TwitterAuthProvider.PROVIDER_ID, // Twitter does not support scopes.
+          firebase.auth.EmailAuthProvider.PROVIDER_ID // Other providers don't need to be given as object.
+        ]
+      }
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+
+      ui.start('#firebaseui-auth-container', uiConfig);
+
+
+
+
+
+  </script>
 
 </head>
 
