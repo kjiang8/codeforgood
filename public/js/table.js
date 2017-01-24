@@ -16,8 +16,19 @@ rootRef.on("value", function(snapshot){
   data = snapshot.val(); //data is updated every time the db changes
 	var table = "";
 
+    
+    //LOADING IN dataTables JS AFTER the table has been populated
+    $.getScript("js/dataTables.min.js");
+    $.getScript("js/datatable.js");
+    console.log('done loading firebase and datatable');
+    
+    
 	$.each(data.volunteers, function(key, value){
-		table += '<tr>';
+	    // var t = $('#example').DataTable();
+	    // t.row.add( [
+	    // 	1,2,3,4,5,6
+            // ] ).draw( false );
+	    table += '<tr>';
 		table += '<td>' + key + '</td>';
 		table += '<td>' + value.firstName + '</td>';
 		table += '<td>' + value.lastName + '</td>';
@@ -29,11 +40,6 @@ rootRef.on("value", function(snapshot){
 
 	$('table').append(table);
 
-
-    //LOADING IN dataTables JS AFTER the table has been populated
-    $.getScript("js/dataTables.min.js");
-    $.getScript("js/datatable.js");
-    console.log('done loading firebase and datatable');
 
     
 });
