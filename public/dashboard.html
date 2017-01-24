@@ -22,7 +22,6 @@
 
     
     <link rel="stylesheet" type="text/css" href="css/dataTables.min.css">
-    <script type="text/javascript" language="javascript" src="js/jquery-1.12.4.js"></script>
 
     
     <title>Volunteer Database</title>
@@ -61,16 +60,24 @@
           <div class="panel-heading">
             <h3 class="panel-title">Volunteers</h3>
             <div class="pull-right">
-              <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
-                <i class="glyphicon glyphicon-filter"></i>
-              </span>
+              <!-- <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body"> -->
+              <!--   <i class="glyphicon glyphicon-filter"></i> -->
+              <!-- </span> -->
             </div>
           </div>
           <div class="panel-body">
             <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Volunteers" />
           </div>
+	  <div>
+	    Toggle column: <a class="toggle-vis" data-column="0">ID</a> -
+	    <a class="toggle-vis" data-column="1">First Name</a> -
+	    <a class="toggle-vis" data-column="2">Last Name</a> -
+	    <a class="toggle-vis" data-column="3">City</a> -
+	    <a class="toggle-vis" data-column="4">State</a> -
+	    <a class="toggle-vis" data-column="5">Zip Code</a>
+	  </div>
 	  <table id="example" class="display" cellspacing="0" width="100%">
-          <!-- <table class="table table-hover" id="dev-table"> -->
+            <!-- <table class="table table-hover" id="dev-table"> -->
             <thead>
               <tr>
                 <th>ID</th>
@@ -81,7 +88,7 @@
                 <th>Zip Code</th>
               </tr>
             </thead>
-            <tbody id="table-body">
+            <!-- <tbody id="table-body"> -->
             </tbody>
           </table>
         </div>

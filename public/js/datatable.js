@@ -1,7 +1,10 @@
 $(document).ready(function() {
     var table = $('#example').DataTable( {
-        "scrollY": "200px",
-        "paging": false
+        "scrollY": "50vh",
+	"scrollCollapse": true,
+        "paging": false,
+	"ordering": true,
+	"info": false
     } );
  
     $('a.toggle-vis').on( 'click', function (e) {

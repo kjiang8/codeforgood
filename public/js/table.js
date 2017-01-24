@@ -30,7 +30,7 @@ rootRef.on("value", function(snapshot){
 	$('table').append(table);
 
 
-    //LOADING IN dataTables JS
+    //LOADING IN dataTables JS AFTER the table has been populated
     $.getScript("js/dataTables.min.js");
     $.getScript("js/datatable.js");
     console.log('done loading firebase and datatable');
