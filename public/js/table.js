@@ -32,9 +32,9 @@ rootRef.on("value", function(snapshot){
 		table += '<td>' + key + '</td>';
 		table += '<td>' + value.firstName + '</td>';
 		table += '<td>' + value.lastName + '</td>';
-		table += '<td>' + value.homeCity + '</td>';
-		table += '<td>' + value.homeState + '</td>';
-		table += '<td>' + value.homeZip + '</td>';
+		table += '<td>' + value.addressInfo.homeCity + '</td>';
+		table += '<td>' + value.addressInfo.homeState + '</td>';
+		table += '<td>' + value.addressInfo.homeZip + '</td>';
 		table += '</tr>';
 	});
 
