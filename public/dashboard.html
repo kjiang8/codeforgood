@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/stylesheet.css">
 
@@ -19,6 +19,7 @@
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
 
     <script src="js/table.js"></script>
+    <script src="js/admin.js"></script>
 
     
     <link rel="stylesheet" type="text/css" href="css/dataTables.min.css">
@@ -54,6 +55,7 @@
       </div>
     </nav>
 
+
     <div class="container">
     <h1>Volunteer Listing</h1>
       <div class="row">
@@ -62,9 +64,6 @@
           <div class="panel-heading">
             <h3 class="panel-title">Volunteers</h3>
             <div class="pull-right">
-              <!-- <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body"> -->
-              <!--   <i class="glyphicon glyphicon-filter"></i> -->
-              <!-- </span> -->
             </div>
           </div>
           <div class="panel-body">
@@ -79,7 +78,6 @@
 	    <a class="toggle-vis" data-column="5">Zip Code</a>
 	  </div>
 	  <table id="example" class="display" cellspacing="0" width="100%">
-            <!-- <table class="table table-hover" id="dev-table"> -->
             <thead>
               <tr>
                 <th>ID</th>
@@ -90,7 +88,6 @@
                 <th>Zip Code</th>
               </tr>
             </thead>
-            <!-- <tbody id="table-body"> -->
             </tbody>
           </table>
         </div>
@@ -98,7 +95,27 @@
       
 
 
+ 
+
+
+
+    <div id="page-wrapper">
+
+    <form class="form-newaccount">
+
+      <div class="form-group">
+
+      <h1>Add Volunteer Category to Database</h1>
+      
+      <label>Event Type</label>
+        <input type="text" class="form-control" id="eventType" placeholder="Event Type" required>
+      <label>Volunteer Categories</label>
+        <textarea type="text" class="form-control" id="volCategory" placeholder="Please separate using commas" required></textarea>
+        <br>
+      <button type="button" class="btn btn-info" name="addVolCat" onClick="addEventVolCat()">Add</button>
+      </div>
     </div>
+
 
 <div id="page-wrapper">
 
@@ -109,6 +126,7 @@
     </div>
     <p id="status"><br></p>
     <button type="button" class="btn btn-info" name="upload" onClick="upload()">Upload</button>
+    <button type="button" class="btn btn-info" name="upload" onClick="cancel()">Cancel</button>
     <br>
     <br>
     <pre id="fileContents">File contents will load here<pre>
@@ -119,6 +137,9 @@
 
   </div>
 
+   </div>
+
+  </div>
 
 
 
