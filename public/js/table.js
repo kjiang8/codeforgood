@@ -11,18 +11,18 @@ var config = {
 firebase.initializeApp(config);
 
 var rootRef = firebase.database().ref();
-rootRef.on("value", function(snapshot){
+rootRef.once("value").then( function(snapshot){
 
   data = snapshot.val(); //data is updated every time the db changes
 	var table = "";
 
-    
+
     //LOADING IN dataTables JS AFTER the table has been populated
     $.getScript("js/dataTables.min.js");
     $.getScript("js/datatable.js");
     console.log('done loading firebase and datatable');
-    
-    
+
+
 	$.each(data.volunteers, function(key, value){
 	    // var t = $('#example').DataTable();
 	    // t.row.add( [
@@ -41,7 +41,7 @@ rootRef.on("value", function(snapshot){
 	$('table').append(table);
 
 
-    
+
 });
 
 
@@ -55,14 +55,14 @@ rootRef.on("value", function(snapshot){
  			return this.each(function(){
  				$(this).on('keyup', function(e){
  					$('.filterTable_no_results').remove();
- 					var $this = $(this), 
-                         search = $this.val().toLowerCase(), 
-                         target = $this.attr('data-filters'), 
-                         $target = $(target), 
+ 					var $this = $(this),
+                         search = $this.val().toLowerCase(),
+                         target = $this.attr('data-filters'),
+                         $target = $(target),
                          $rows = $target.find('tbody tr');
-                      
+
  					if(search == '') {
- 						$rows.show(); 
+ 						$rows.show();
  					} else {
  						$rows.each(function(){
  							var $this = $(this);
@@ -84,11 +84,11 @@ rootRef.on("value", function(snapshot){
  $(function(){
      // attach table filter plugin to inputs
  	$('[data-action="filter"]').filterTable();
-	
+
  	$('.container').on('click', '.panel-heading span.filter', function(e){
- 		var $this = $(this), 
+ 		var $this = $(this),
  			$panel = $this.parents('.panel');
-		
+
  		$panel.find('.panel-body').slideToggle();
  		if($this.css('display') != 'none') {
  			$panel.find('.panel-body input').focus();
@@ -119,7 +119,7 @@ rootRef.on("value", function(snapshot){
  					fileDisplayArea.innerText = fileContents;
  				}
 
- 				reader.readAsText(file);	
+ 				reader.readAsText(file);
  			} else {
  				fileDisplayArea.innerText = "File not supported!"
  			}
@@ -129,7 +129,7 @@ rootRef.on("value", function(snapshot){
 function cancel(){
 	$('#fileInput').replaceWith($('#fileInput').val('').clone(true));
 	$('#fileContents').replaceWith($('#fileContents').val('File contents will load here').clone(true));
-	
+
 }
 
  function upload(){
@@ -180,7 +180,7 @@ function cancel(){
  	  	//console.log(postData);
 
  	  	var uid =  Math.floor(Math.random()*1000000).toString();
-	  	
+
  	  	var postData = {
  	  		firstName: firstName,
  	  		lastName: lastName,
@@ -193,7 +193,7 @@ function cancel(){
  	  	}
 
  	  	updates['/volunteers/' + uid] = postData;
-	  	
+
  	}
 
  	return firebase.database().ref().update(updates);
@@ -201,6 +201,3 @@ function cancel(){
  	location.reload();
 
  }
-
-
-
