@@ -23,7 +23,7 @@ rootRef.once("value").then( function(snapshot){
     console.log('done loading firebase and datatable');
 
 
-	$.each(data.volunteers, function(key, value){
+	$.each(data.Volunteers, function(key, value){
 	    // var t = $('#example').DataTable();
 	    // t.row.add( [
 	    // 	1,2,3,4,5,6

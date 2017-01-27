@@ -13,18 +13,16 @@ firebase.initializeApp(config);
 var rootRef = firebase.database().ref();
 rootRef.on("value", function(snapshot){
 
-  	data = snapshot.val(); //data is updated every time the db changes
+    data = snapshot.val(); //data is updated every time the db changes
 
-  	var list = "";
-	$.each(data.volCategories, function(key, value){
-		list += "<option>" + key + "</option>";
+    var list = "";
+  $.each(data.Events, function(key, value){
+    list += "<option>" + key + "</option>";
 
-	});
+  });
 
-	//console.log(list);
+  //console.log(list);
 
-	$('#eventList').append(list);
+  $('#eventList').append(list);
 
 });
-
-

@@ -12,13 +12,13 @@
     <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="css/dashboard.css" >
 
-    <link rel="stylesheet" href="css/stylesheet.css">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
 
@@ -142,18 +142,57 @@ initApp = function() {
 
 </div>
 
+<h2>First Time Volunteer Information</h2>
+
 <div class="row">
-  <div class="col-sm-6 col-md-4">
+  <div class="col-sm-6 col-md-6">
     <div class="thumbnail">
-      <img src="Volunteer_Registration_Form.jpg" alt="Waiver">
       <div class="caption">
-        <h3>Volunteer Registration Form</h3>
+        <h3>Waiver And Release Of Liability</h3>
         <p>Please Read and click the button below when you are ready to sign the Waiver</p>
+        <p><b>I hereby waive all claims against the Alzheimer's Association, sponsors, or any personnel from any and all claims that may arise from or result in any expenses, personal injury, loss or damage incurred to me or by me during my volunteer participation in this event. I also grant full permission for organizers to use photographs, films or videos of me and quotes from me in legitimate accounts and promotions of this event.</b></p>
+
         <p><a href="#" class="btn btn-primary" role="button">Sign Liability Waiver</a></p>
       </div>
     </div>
   </div>
+
+  <div class="col-sm-6 col-md-6">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>Volunteer Survey</h3>
+        <p>Is this your first time volunteering with the Alzheimer's Association MA/NH Chapter?</p>
+
+        <div id="first">
+          <div class="radio">
+            <label><input type="radio" name="first" value="yes">Yes</label>
+          </div>
+
+          <div class="radio">
+            <label><input type="radio" name="first" value="no">No</label>
+          </div>
+        </div>
+
+        <form>
+          <div class="form-group">
+            <label for="formGroupExampleInput">If not, in what year did you start volunteering with us?</label>
+
+            <input type="text" id="startYear"/>
+          </div>
+
+        </form>
+
+        <p><a href="#" class="btn btn-primary" role="button">Submit</a></p>
+
 </div>
+</div>
+
+
+</div>
+
+</div>
+
+
 
 
 <a href="dashboard.html" button class="btn btn-lg btn-primary btn-block" name="sub">Volunteer Database</a>

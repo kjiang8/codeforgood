@@ -16,14 +16,85 @@
 
     <link href="css/dashboard.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/stylesheet.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
 
-    <script src="js/signup.js"></script>
 
+<!--<script src="js/signup.js"></script> 
+not working rip, must paste directly into file
+-->
+
+
+<script>
+
+
+var data = {}
+
+var config = {
+    apiKey: "AIzaSyB9MrLpsxRzKq1VzCbA1T-6Yi6raHIxiM0",
+    authDomain: "code-for-good-35ef5.firebaseapp.com",
+    databaseURL: "https://code-for-good-35ef5.firebaseio.com",
+    //storageBucket: "<BUCKET>.appspot.com",
+    //messagingSenderId: "<SENDER_ID>",
+  };
+
+firebase.initializeApp(config);
+
+var rootRef = firebase.database().ref();
+rootRef.on("value", function(snapshot){
+
+    data = snapshot.val(); //data is updated every time the db changes
+
+    var list = "";
+  $.each(data.Events, function(key, value){
+    list += "<option>" + key + "</option>";
+
+  });
+  //console.log(list);
+
+  $('#eventList').append(list);
+
+
+});
+
+
+function addReg(){
+
+  var updates = {}
+
+  var eventType = $('#eventList').val();
+  var catType = $('#categoryList').val();
+  var hours = $('#hours').val();
+  var referral = $('#referral input:radio:checked').val();
+
+  var postData = {
+
+    position: catType,
+    hours: hours,
+    referral: referral,
+
+  }
+
+      updates['/Volunteers/00000/events/' + eventType] = postData;
+      return firebase.database().ref().update(updates);
+  location.reload();
+
+  }
+
+  
+$( function() {
+    $("#datepicker").datepicker();
+  } );
+
+
+
+</script>
 
 
 
@@ -51,86 +122,79 @@
 
   <div class="container">
     <div class="form-group">
-    <h2><label for="exampleSelect1">Sign Up for an Event:</label></h2>
+    <h3><label for="exampleSelect1">Sign Up for an Event</label></h3>
     <select class="form-control" id="eventList">
       <option>Choose...</option>
-      <option>Walk to End Alzheimer's</option>
-      <option>The Longest Day</option>
-      <option>Blondes vs. Brunette's Flag Football Game</option>
     </select>
   </div>
 
     <div class="form-group">
-    <h2><label for="exampleInputEmail1">Hours Volunteered</label></h2>
-
-    <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Scrollable Menu <span class="caret"></span></button>
-        <ul role="menu" class="dropdown-menu scrollable-menu"> 
-          <li>1</li>
-          <li>2</li>
-        </ul>
-    </div>
-
-
+    <h3><label for="exampleSelect1">Volunteer Category</label></h3>
+    <select class="form-control" id="categoryList">
+      <option>Choose...</option>
+    </select>
   </div>
 
-    <div class="form-check">
-        <h2>How did you hear about us?</h2>
+    <div class="form-group">
+    <h3><label for="exampleInputEmail1">Hours Volunteered</label></h3>
 
-    <label class="form-check-label">
-        <input class="form check-input" type="checkbox" value="">
-        From a Friend </label>
+  <input type="number" name="quantity" min="1" max="100" id="hours">
+  </div>
+
+    <div class="form-group">
+    <h3><label for="exampleInputEmail1">Date Volunteered</label></h3>
+
+  <input type="text" id="datepicker"/>
+  </div>
 
 
-        <div class="form-check">
-        <label class="form-check-label">
-        <input class="form check-input" type="checkbox" value="">
-        Email Listing </label>
 
-        <div class="form-check">
-            <label class="form-check-label">
-        <input class="form check-input" type="checkbox" value="">
-        Facebook </label>
+            <div class="form-group" id="referral">
+        <h3>How did you hear about us?</h3>
 
-        <div class="form-check">
+          <div class="radio">
+          <label><input type="radio" name="optradio" value="friend">From a Friend</label>
+          </div>
 
-            <label class="form-check-label">
-        <input class="form check-input" type="checkbox" value="">
-        Previous Event </label>
+          <div class="radio">
+          <label><input type="radio" name="optradio" value="email">Email Listing</label>
+          </div>
 
-        <div class="form-check">
-            <label class="form-check-label" for="other-text-input">
-        <input class="form check-input" type="checkbox" value="">
-        <label class="col-2 col-form-label">
-        <input class="form-control" type="text" value="Other..." id="example-text-input"> </label></label>
+          <div class="radio">
+          <label><input type="radio" name="optradio" value="socialmedia">Social Media</label>
+          </div>
+
+          <div class="radio">
+          <label><input type="radio" name="optradio" value="previous">Previous Event</label>
+          </div>
+
+          <div class="radio">
+          <label><input type="radio" name="optradio" value="friend">Volunteer Match</label>
+          </div>
+
+          <div class="radio">
+          <label><input type="radio" name="optradio" value="intwebsite">Alzheimer's Association Website</label>
+          </div>
+
+          <div class="radio">
+          <label><input type="radio" name="optradio" value="extwebsite">External Website</label>
+          </div>
+
+
+        <div class="radio">
+            <label>
+       <input type="radio" name="optradio" value="other">
+        <input class="form-control" type="text" value="Other..." id="example-text-input"></label>
+        </div>
+
+
             
        
 </div>
 
-<div class="form-check form check-inline">
-        <h2>Is this your first time volunteering with the Alzheimer's Association MA/NH Chapter?</h2>
-
-<div class="form-check form-check-inline">
-  <label class="form-check-label">
-    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"> Yes
-  </label>
-<div class="form-check form-check-inline">
-  <label class="form-check-label">
-    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2"> No
-  </label>
-</div>
-
-<form>
-  <div class="form-group">
-    <label for="formGroupExampleInput">If not, in what year did you start volunteering with us?</label>
-    <input type="text" class="form-control" id="formGroupExampleInput">
-  </div>
 
 
-
-  </div>
-
-  <button class="btn btn-lg btn-primary btn-block" name="sub">Submit</button>
+  <button class="btn btn-lg btn-primary btn-block" name="sub" onClick = "addReg()">Submit</button>
 
 </div>
 
@@ -138,6 +202,23 @@
 
  <body>
 
+<script>
+
+var A = $('#eventList');
+
+
+A.onchange = function(){
+  console.log('changed');
+  var _val = this.options[this.selectedIndex].value;
+  for (var i in data.Events.this.SelectedIndex.Category){
+    console.log(i);
+    var op = $('<option>');
+    op.text = data.Events.this.SelectedIndex.Category[i];
+    $('#categoryList').append(op);
+  }
+}
+
+</script>
 
   </body>
 </html>
