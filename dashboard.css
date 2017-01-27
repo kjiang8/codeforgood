@@ -1,0 +1,30 @@
+.navbar-custom {
+  background-color:#6f30a5;
+    color:#ffffff;
+    border-radius:0;
+}
+  
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+  background-color: #6f30a5;
+}
+      
+.navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #6f30a5;
+}
+      
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}
+.navbar-custom .navbar-toggle {
+    background-color:#eeeeee;
+}
+.navbar-custom .icon-bar {
+    background-color:#6f30a5;
+}
+
+/* http://stackoverflow.com/questions/18529274/change-navbar-color-in-twitter-bootstrap-3 */
