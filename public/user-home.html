@@ -43,6 +43,8 @@
 
   });
 
+console.log($('#profile').val());
+
 initApp = function() {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
@@ -56,7 +58,19 @@ initApp = function() {
             user.getToken().then(function(accessToken) {
               document.getElementById('sign-in-status').textContent = 'Signed in';
               document.getElementById('sign-in').textContent = 'Sign out';
-              document.getElementById('account-details').textContent = JSON.stringify({
+              //document.getElementById('account-details').textContent = "Name: " + displayName + "Email: " + email + "Photo: " + photoURL; 
+
+              //console.log(providerData);
+
+              var profileInfo = "";
+
+              profileInfo += '<img src="' + photoURL + '" class="img-rounded" alt="Cinque Terre" width="100" height="100"><br>' + "<p>Name: " + displayName + "</p><p>Email: " + email + "</p>";
+
+              $('#testProfile').append(profileInfo);
+
+
+/*
+              JSON.stringify({
                 displayName: displayName,
                 email: email,
                 emailVerified: emailVerified,
@@ -64,7 +78,9 @@ initApp = function() {
                 uid: uid,
                 accessToken: accessToken,
                 providerData: providerData
-              }, null, '  ');
+              }, null, '  '); */
+
+
             });
           } else {
             // User is signed out.
@@ -80,6 +96,28 @@ initApp = function() {
       window.addEventListener('load', function() {
         initApp()
       });
+
+function addStart(){
+
+  var updates = {};
+
+  var firstTime = $('#first input:radio:checked').val();
+
+  var startYear = $('#startYear').val();
+
+  if (firstTime=="yes"){
+    startYear = "2017"
+  }
+
+  var postData = {
+    dateSubmitted: startYear,
+  }
+
+  updates['/Volunteers/00000/'] = postData;
+      return firebase.database().ref().update(updates);
+  location.reload();
+
+}
 
 
 </script>
@@ -121,9 +159,8 @@ initApp = function() {
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h4 class="mb-1">Current Profile Information</h4>
-      <small class="text-muted">3 days ago</small>
     </div>
-    <p class="mb-1"><div id="account-details"></div></p>
+    <p class="mb-1" id="profile"><div id="account-details"></div><div id="testProfile"></div></p>
   </a>
   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
@@ -175,14 +212,14 @@ initApp = function() {
 
         <form>
           <div class="form-group">
-            <label for="formGroupExampleInput">If not, in what year did you start volunteering with us?</label>
+            <label>If not, in what year did you start volunteering with us?</label>
 
             <input type="text" id="startYear"/>
           </div>
 
         </form>
 
-        <p><a href="#" class="btn btn-primary" role="button">Submit</a></p>
+        <p><a href="#" onClick="addStart()" class="btn btn-primary" role="button">Submit</a></p>
 
 </div>
 </div>
