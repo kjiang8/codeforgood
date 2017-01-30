@@ -35,6 +35,17 @@ rootRef.once("value").then( function(snapshot){
 		table += '<td>' + value.addressInfo.homeCity + '</td>';
 		table += '<td>' + value.addressInfo.homeState + '</td>';
 		table += '<td>' + value.addressInfo.homeZip + '</td>';
+    var allEvents = "";
+    var allHours = 0;
+    var allPositions = "";
+    for (var eventName in value.events) {
+      allEvents += eventName + ", ";
+      allHours += value.events[eventName]["hours"];
+      allPositions += value.events[eventName]["position"] + ", ";
+    }
+    table += '<td>' + allEvents + '</td>';
+    table += '<td>' + allHours + '</td>';
+    table += '<td>' + allPositions + '</td>';
 		table += '</tr>';
 	});
 
