@@ -71,27 +71,34 @@
           <div class="panel-body">
             <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Volunteers" />
           </div>
-          <div>
-            Toggle column: <a class="toggle-vis" data-column="0">ID</a> -
-            <a class="toggle-vis" data-column="1">First Name</a> -
-            <a class="toggle-vis" data-column="2">Last Name</a> -
-            <a class="toggle-vis" data-column="3">City</a> -
-            <a class="toggle-vis" data-column="4">State</a> -
-            <a class="toggle-vis" data-column="5">Zip Code</a>
+          <div style="float:left;">
+            <h4>
+              Toggle column: <a class="toggle-vis" data-column="0">ID</a> -
+              <a class="toggle-vis" data-column="1">First Name</a> -
+              <a class="toggle-vis" data-column="2">Last Name</a> -
+              <a class="toggle-vis" data-column="3">City</a> -
+              <a class="toggle-vis" data-column="4">State</a> -
+              <a class="toggle-vis" data-column="5">Zip Code</a>
+            </h4>
           </div>
-          <table id="example" class="display" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Zip Code</th>
-              </tr>
-            </thead>
-          </tbody>
-        </table>
+          <div style="float:right;">
+            <button id="btnExport" class="btn btn-default">Export to xls</button>
+          </div>
+          <div id="table_wrapper_for_export">
+            <table id="example" class="display" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Zip Code</th>
+                </tr>
+              </thead>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -153,4 +160,7 @@
 
 
 </body>
+
+<script src="js/export.js"></script>
+
 </html>
