@@ -10,10 +10,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <!-- stylesheet -->
-  <link rel="stylesheet" href="css/stylesheet.css">
   <!-- Firebase JS -->
   <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+  <!-- stylesheet -->
+  <link rel="stylesheet" href="css/stylesheet.css">
   <!-- For the Table -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/dataTables.min.css">
@@ -23,13 +23,22 @@
   <script src="js/admin.js"></script>
   <!-- title -->
   <title>Volunteer Database</title>
+  <!-- Navbar colors -->
+  <style>
+  nav {
+    background-color: #632a96;
+  }
+  nav a {
+    color: white;
+  }
+  </style>
 </head>
 
 
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-fixed-top navbar-light text-black" style="background-color: #6F30A5;">
+  <nav class="navbar navbar-fixed-top navbar-light text-black">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -102,59 +111,59 @@
                   <th>allPositions</th>
                 </tr>
               </thead>
-          </table>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- For Generating more Tables -->
-    <div id="more-tables"></div>
-
-
-    <!-- Add Volunteer Category -->
-    <div class="col-sm-6 col-md-6">
-      <div class="thumbnail">
-        <div class="caption">
-          <form class="form-newaccount">
-            <div class="form-group">
-              <h1>Add Volunteer Category to Database</h1>
-              <label>Event Type</label>
-              <input type="text" class="form-control" id="eventType" placeholder="Event Type" required>
-              <label>Volunteer Categories</label>
-              <textarea type="text" class="form-control" id="volCategory" placeholder="Please separate using commas" required></textarea>
-              <br>
-              <button type="button" class="btn btn-info" name="addVolCat" onClick="addEventVolCat()">Add</button>
-            </div>
+            </table>
           </div>
         </div>
       </div>
 
-      <!-- Upload/Import to DB -->
+
+      <!-- For Generating more Tables -->
+      <div id="more-tables"></div>
+
+
+      <!-- Add Volunteer Category -->
       <div class="col-sm-6 col-md-6">
         <div class="thumbnail">
           <div class="caption">
-            <h1>Upload File to Database</h1>
-            <p>The first row of the file should be a header that has: Date Submitted, Last Name, First Name, Address 1, Address 2, City, State/Province, Zip Code, Country, Primary Email, and Home Phone</p>
-            <div>
-              Select a .txt or .csv file: <input type="file" id="fileInput">
-            </div>
-            <p id="status"><br></p>
-            <button type="button" class="btn btn-info" name="upload" onClick="upload()">Upload</button>
-            <button type="button" class="btn btn-info" name="upload" onClick="cancel()">Cancel</button>
-            <br>
-            <br>
-            <pre id="fileContents">File contents will load here<pre>
-              <br>
+            <form class="form-newaccount">
+              <div class="form-group">
+                <h1>Add Volunteer Category to Database</h1>
+                <label>Event Type</label>
+                <input type="text" class="form-control" id="eventType" placeholder="Event Type" required>
+                <label>Volunteer Categories</label>
+                <textarea type="text" class="form-control" id="volCategory" placeholder="Please separate using commas" required></textarea>
+                <br>
+                <button type="button" class="btn btn-info" name="addVolCat" onClick="addEventVolCat()">Add</button>
+              </div>
             </div>
           </div>
         </div>
-        <br>
+
+        <!-- Upload/Import to DB -->
+        <div class="col-sm-6 col-md-6">
+          <div class="thumbnail">
+            <div class="caption">
+              <h1>Upload File to Database</h1>
+              <p>The first row of the file should be a header that has: Date Submitted, Last Name, First Name, Address 1, Address 2, City, State/Province, Zip Code, Country, Primary Email, and Home Phone</p>
+              <div>
+                Select a .txt or .csv file: <input type="file" id="fileInput">
+              </div>
+              <p id="status"><br></p>
+              <button type="button" class="btn btn-info" name="upload" onClick="upload()">Upload</button>
+              <button type="button" class="btn btn-info" name="upload" onClick="cancel()">Cancel</button>
+              <br>
+              <br>
+              <pre id="fileContents">File contents will load here<pre>
+                <br>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
       </div>
     </div>
-  </div>
 
-</body>
-<!-- For Exporting Table Data -->
-<script src="js/export.js"></script>
-</html>
+  </body>
+  <!-- For Exporting Table Data -->
+  <script src="js/export.js"></script>
+  </html>
