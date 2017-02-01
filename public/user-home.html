@@ -2,28 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <meta name="description" content="">
   <meta name="author" content="">
-
-    <!-- Bootstrap core CSS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <link href="https://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
-
-
-    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
-
-    <title>Event Sign-Up</title>
-
-
-
-<script>
+  <!-- Bootstrap core CSS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link href="https://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+  <!-- Firebase JS -->
+  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+  <!-- title -->
+  <title>Event Sign-Up</title>
+  <script>
 
   var config = {
     apiKey: "AIzaSyB9MrLpsxRzKq1VzCbA1T-6Yi6raHIxiM0",
@@ -35,64 +28,62 @@
   firebase.initializeApp(config);
   var rootRef = firebase.database().ref();
   rootRef.on("value", function(snapshot){
-
     //console.log(snapshot.val());
-
   });
 
-console.log($('#profile').val());
+  console.log($('#profile').val());
 
-initApp = function() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            // User is signed in.
-            var displayName = user.displayName;
-            var email = user.email;
-            var emailVerified = user.emailVerified;
-            var photoURL = user.photoURL;
-            var uid = user.uid;
-            var providerData = user.providerData;
-            user.getToken().then(function(accessToken) {
-              document.getElementById('sign-in-status').textContent = 'Signed in';
-              document.getElementById('sign-in').textContent = 'Sign out';
-              //document.getElementById('account-details').textContent = "Name: " + displayName + "Email: " + email + "Photo: " + photoURL;
+  initApp = function() {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        user.getToken().then(function(accessToken) {
+          document.getElementById('sign-in-status').textContent = 'Signed in';
+          document.getElementById('sign-in').textContent = 'Sign out';
+          //document.getElementById('account-details').textContent = "Name: " + displayName + "Email: " + email + "Photo: " + photoURL;
 
-              //console.log(providerData);
+          //console.log(providerData);
 
-              var profileInfo = "";
+          var profileInfo = "";
 
-              profileInfo += '<img src="' + photoURL + '" class="img-rounded" alt="Cinque Terre" width="100" height="100"><br>' + "<p>Name: " + displayName + "</p><p>Email: " + email + "</p>";
+          profileInfo += '<img src="' + photoURL + '" class="img-rounded" alt="Cinque Terre" width="100" height="100"><br>' + "<p>Name: " + displayName + "</p><p>Email: " + email + "</p>";
 
-              $('#testProfile').append(profileInfo);
-
-
-/*
-              JSON.stringify({
-                displayName: displayName,
-                email: email,
-                emailVerified: emailVerified,
-                photoURL: photoURL,
-                uid: uid,
-                accessToken: accessToken,
-                providerData: providerData
-              }, null, '  '); */
+          $('#testProfile').append(profileInfo);
 
 
-            });
-          } else {
-            // User is signed out.
-            document.getElementById('sign-in-status').textContent = 'Signed out';
-            document.getElementById('sign-in').textContent = 'Sign in';
-            document.getElementById('account-details').textContent = 'null';
-          }
-        }, function(error) {
-          console.log(error);
-        });
-      };
+          /*
+          JSON.stringify({
+          displayName: displayName,
+          email: email,
+          emailVerified: emailVerified,
+          photoURL: photoURL,
+          uid: uid,
+          accessToken: accessToken,
+          providerData: providerData
+        }, null, '  '); */
 
-      window.addEventListener('load', function() {
-        initApp()
+
       });
+    } else {
+      // User is signed out.
+      document.getElementById('sign-in-status').textContent = 'Signed out';
+      document.getElementById('sign-in').textContent = 'Sign in';
+      document.getElementById('account-details').textContent = 'null';
+    }
+  }, function(error) {
+    console.log(error);
+  });
+};
+
+window.addEventListener('load', function() {
+  initApp()
+});
 
 function addStart(){
 
@@ -105,13 +96,11 @@ function addStart(){
   if (firstTime=="yes"){
     startYear = "2017"
   }
-
   var postData = {
     dateSubmitted: startYear,
   }
-
   updates['/Volunteers/00000/'] = postData;
-      return firebase.database().ref().update(updates);
+  return firebase.database().ref().update(updates);
   location.reload();
 
 }
@@ -121,9 +110,10 @@ function addStart(){
 
 </head>
 
- <body>
+<body>
 
-     <nav class="navbar navbar-fixed-top navbar-light text-black" style="background-color: #6F30A5;">
+  <!-- Navbar -->
+  <nav class="navbar navbar-fixed-top navbar-light text-black" style="background-color: #6F30A5;">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-control="navbarToggleExternalContent" aria-expanded="false" aria-label-"Toggle navigation">
@@ -147,99 +137,80 @@ function addStart(){
 
 <div class="container">
 
-<h3>Welcome to the Alzheimer's Association Volunteer Page</h3>
-<div id="sign-in-status"></div>
-<div id="sign-in"></div>
+  <h3>Welcome to the Alzheimer's Association Volunteer Page</h3>
+  <div id="sign-in-status"></div>
+  <div id="sign-in"></div>
 
-
-<h1>Your Stats</h1>
-<div class="list-group">
+  <h1>Your Stats</h1>
+  <div class="list-group">
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h4 class="mb-1">Current Profile Information</h4>
+      <div class="d-flex w-100 justify-content-between">
+        <h4 class="mb-1">Current Profile Information</h4>
+      </div>
+      <p class="mb-1" id="profile"><div id="account-details"></div><div id="testProfile"></div></p>
+    </a>
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h4 class="mb-1">Events Attended</h4>
+        <small>3 days ago</small>
+      </div>
+      <p class="mb-1">Walk for Alzheimer's</p>
+    </a>
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h4 class="mb-1">Total Hours Previously Volunteered</h4>
+        <small class="text-muted">3 days ago</small>
+      </div>
+      <p class="mb-1">5 hours at Walk for Alzheimers</p>
+    </a>
+
+  </div>
+
+  <h2>First Time Volunteer Information</h2>
+  <div class="row">
+    <div class="col-sm-6 col-md-6">
+      <div class="thumbnail">
+        <div class="caption">
+          <h3>Waiver And Release Of Liability</h3>
+          <p>Please Read and click the button below when you are ready to sign the Waiver</p>
+          <p><b>I hereby waive all claims against the Alzheimer's Association, sponsors, or any personnel from any and all claims that may arise from or result in any expenses, personal injury, loss or damage incurred to me or by me during my volunteer participation in this event. I also grant full permission for organizers to use photographs, films or videos of me and quotes from me in legitimate accounts and promotions of this event.</b></p>
+          <p><a href="#" class="btn btn-primary" role="button">Sign Liability Waiver</a></p>
+        </div>
+      </div>
     </div>
-    <p class="mb-1" id="profile"><div id="account-details"></div><div id="testProfile"></div></p>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h4 class="mb-1">Events Attended</h4>
-      <small>3 days ago</small>
-    </div>
-    <p class="mb-1">Walk for Alzheimer's</p>
-  </a>
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h4 class="mb-1">Total Hours Previously Volunteered</h4>
-      <small class="text-muted">3 days ago</small>
-    </div>
-    <p class="mb-1">5 hours at Walk for Alzheimers</p>
-  </a>
 
-</div>
-
-<h2>First Time Volunteer Information</h2>
-
-<div class="row">
-  <div class="col-sm-6 col-md-6">
-    <div class="thumbnail">
-      <div class="caption">
-        <h3>Waiver And Release Of Liability</h3>
-        <p>Please Read and click the button below when you are ready to sign the Waiver</p>
-        <p><b>I hereby waive all claims against the Alzheimer's Association, sponsors, or any personnel from any and all claims that may arise from or result in any expenses, personal injury, loss or damage incurred to me or by me during my volunteer participation in this event. I also grant full permission for organizers to use photographs, films or videos of me and quotes from me in legitimate accounts and promotions of this event.</b></p>
-
-        <p><a href="#" class="btn btn-primary" role="button">Sign Liability Waiver</a></p>
+    <div class="col-sm-6 col-md-6">
+      <div class="thumbnail">
+        <div class="caption">
+          <h3>Volunteer Survey</h3>
+          <p>Is this your first time volunteering with the Alzheimer's Association MA/NH Chapter?</p>
+          <div id="first">
+            <div class="radio">
+              <label><input type="radio" name="first" value="yes">Yes</label>
+            </div>
+            <div class="radio">
+              <label><input type="radio" name="first" value="no">No</label>
+            </div>
+          </div>
+          <form>
+            <div class="form-group">
+              <label>If not, in what year did you start volunteering with us?</label>
+              <input type="text" id="startYear"/>
+            </div>
+          </form>
+          <p><a href="#" onClick="addStart()" class="btn btn-primary" role="button">Submit</a></p>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="col-sm-6 col-md-6">
-    <div class="thumbnail">
-      <div class="caption">
-        <h3>Volunteer Survey</h3>
-        <p>Is this your first time volunteering with the Alzheimer's Association MA/NH Chapter?</p>
 
-        <div id="first">
-          <div class="radio">
-            <label><input type="radio" name="first" value="yes">Yes</label>
-          </div>
+  <a href="dashboard.html" button class="btn btn-lg btn-primary btn-block" name="sub">Volunteer Database</a>
+  <a href="event-page.html" button class="btn btn-lg btn-primary btn-block" name="sub">Sign Up for an Event</a>
 
-          <div class="radio">
-            <label><input type="radio" name="first" value="no">No</label>
-          </div>
-        </div>
-
-        <form>
-          <div class="form-group">
-            <label>If not, in what year did you start volunteering with us?</label>
-
-            <input type="text" id="startYear"/>
-          </div>
-
-        </form>
-
-        <p><a href="#" onClick="addStart()" class="btn btn-primary" role="button">Submit</a></p>
-
-</div>
-</div>
-
+  <br><br><br><br><br><br><br><br><br><br>
 
 </div>
 
-</div>
-
-
-
-
-<a href="dashboard.html" button class="btn btn-lg btn-primary btn-block" name="sub">Volunteer Database</a>
-<a href="event-page.html" button class="btn btn-lg btn-primary btn-block" name="sub">Sign Up for an Event</a>
-
-<br><br><br><br><br><br><br><br><br><br>
-
-</div>
-
-
-
-
-
-  </body>
+</body>
 </html>
