@@ -2,62 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <link href="https://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/stylesheet.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
-
-    <script src="js/table.js"></script>
-    <script src="js/admin.js"></script>
-
-
-    <link rel="stylesheet" type="text/css" href="css/dataTables.min.css">
-    <script type="text/javascript" language="javascript" src="js/dataTables.min.js"></script>
-    <!-- <script type="text/javascript" language="javascript" src="js/table.js"></script> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap core CSS -->
+  <!-- <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <link href="https://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/stylesheet.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+  <script src="js/table.js"></script>
+  <script src="js/admin.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/dataTables.min.css">
+  <script type="text/javascript" language="javascript" src="js/dataTables.min.js"></script>
+  <!-- <script type="text/javascript" language="javascript" src="js/table.js"></script> -->
+  <title>Volunteer Database</title>
+</head>
 
 
-    <title>Volunteer Database</title>
+<body>
 
-  </head>
-
-
-  <body>
-
- <nav class="navbar navbar-fixed-top navbar-light text-black" style="background-color: #6F30A5;">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Dashboard</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="user-home.html">Home</a></li>
-            <li><a href="http://www.alz.org/manh/">About the Alzheimer's Association</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-
+  <nav class="navbar navbar-fixed-top navbar-light text-black" style="background-color: #6F30A5;">
     <div class="container">
-      <div class="row">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Alzheimer's Association Volunteer Database</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="http://www.alz.org/manh/">About the Alzheimer's Association</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container">
+
+    <br>
+    <a href="user-home.html" button class="btn btn-lg btn-primary btn-block" name="sub">Back to User Page</a>
+
+    <div class="row">
       <div class="column">
         <div class="panel panel-primary">
           <div class="panel-heading">
@@ -68,75 +63,94 @@
           <div class="panel-body">
             <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Volunteers" />
           </div>
-	  <div>
-	    Toggle column: <a class="toggle-vis" data-column="0">ID</a> -
-	    <a class="toggle-vis" data-column="1">First Name</a> -
-	    <a class="toggle-vis" data-column="2">Last Name</a> -
-	    <a class="toggle-vis" data-column="3">City</a> -
-	    <a class="toggle-vis" data-column="4">State</a> -
-	    <a class="toggle-vis" data-column="5">Zip Code</a>
-	  </div>
-	  <table id="example" class="display" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Zip Code</th>
-              </tr>
-            </thead>
-            </tbody>
+          <div style="float:left;">
+            <h4>
+              Toggle column: <a class="toggle-vis" data-column="0">ID</a> -
+              <a class="toggle-vis" data-column="1">First Name</a> -
+              <a class="toggle-vis" data-column="2">Last Name</a> -
+              <a class="toggle-vis" data-column="3">City</a> -
+              <a class="toggle-vis" data-column="4">State</a> -
+              <a class="toggle-vis" data-column="5">Zip Code</a> -
+              <a class="toggle-vis" data-column="6">allEvents</a> -
+              <a class="toggle-vis" data-column="7">allHours</a> -
+              <a class="toggle-vis" data-column="8">allPositions</a>
+            </h4>
+          </div>
+          <div style="float:right;">
+            <button id="btnExport" class="btn btn-default">Export to Excel</button>
+          </div>
+          <div id="table_wrapper_for_export">
+            <table id="example" class="display" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Zip Code</th>
+                  <th>allEvents</th>
+                  <th>allHours</th>
+                  <th>allPositions</th>
+                </tr>
+              </thead>
           </table>
         </div>
       </div>
+    </div>
 
 
-
+    <div id="more-tables"></div>
 
 
 
 
     <div class="col-sm-6 col-md-6">
+      <div class="thumbnail">
+        <div class="caption">
 
-    <form class="form-newaccount">
+          <form class="form-newaccount">
 
-      <div class="form-group">
+            <div class="form-group">
 
-      <h1>Add Volunteer Category to Database</h1>
+              <h1>Add Volunteer Category to Database</h1>
 
-      <label>Event Type</label>
-        <input type="text" class="form-control" id="eventType" placeholder="Event Type" required>
-      <label>Volunteer Categories</label>
-        <textarea type="text" class="form-control" id="volCategory" placeholder="Please separate using commas" required></textarea>
-        <br>
-      <button type="button" class="btn btn-info" name="addVolCat" onClick="addEventVolCat()">Add</button>
+              <label>Event Type</label>
+              <input type="text" class="form-control" id="eventType" placeholder="Event Type" required>
+              <label>Volunteer Categories</label>
+              <textarea type="text" class="form-control" id="volCategory" placeholder="Please separate using commas" required></textarea>
+              <br>
+              <button type="button" class="btn btn-info" name="addVolCat" onClick="addEventVolCat()">Add</button>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <div class="col-sm-6 col-md-6">
+
+        <div class="thumbnail">
+          <div class="caption">
+            <h1>Upload File to Database</h1>
+            <p>The first row of the file should be a header that has: Date Submitted, Last Name, First Name, Address 1, Address 2, City, State/Province, Zip Code, Country, Primary Email, and Home Phone</p>
+            <div>
+              Select a .txt or .csv file: <input type="file" id="fileInput">
+            </div>
+            <p id="status"><br></p>
+            <button type="button" class="btn btn-info" name="upload" onClick="upload()">Upload</button>
+            <button type="button" class="btn btn-info" name="upload" onClick="cancel()">Cancel</button>
+            <br>
+            <br>
+            <pre id="fileContents">File contents will load here<pre>
+              <br>
+            </div>
+          </div>
+        </div>
+        <br>
+
+
+      </div>
+
     </div>
-
-
-<div class="col-sm-6 col-md-6">
-
-    <h1>Upload File to Database</h1>
-    <p>The first row of the file should be a header that has: Date Submitted, Last Name, First Name, Address 1, Address 2, City, State/Province, Zip Code, Country, Primary Email, and Home Phone</p>
-    <div>
-      Select a .txt or .csv file: <input type="file" id="fileInput">
-    </div>
-    <p id="status"><br></p>
-    <button type="button" class="btn btn-info" name="upload" onClick="upload()">Upload</button>
-    <button type="button" class="btn btn-info" name="upload" onClick="cancel()">Cancel</button>
-    <br>
-    <br>
-    <pre id="fileContents">File contents will load here<pre>
-    <br>
-  </div>
-      <br>
-
-
-  </div>
-
-   </div>
 
   </div>
 
@@ -144,4 +158,7 @@
 
 
 </body>
+
+<script src="js/export.js"></script>
+
 </html>

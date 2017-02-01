@@ -10,14 +10,11 @@
   <meta name="author" content="">
 
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="css/dashboard.css" >
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
@@ -38,7 +35,7 @@
   firebase.initializeApp(config);
   var rootRef = firebase.database().ref();
   rootRef.on("value", function(snapshot){
-    
+
     //console.log(snapshot.val());
 
   });
@@ -58,7 +55,7 @@ initApp = function() {
             user.getToken().then(function(accessToken) {
               document.getElementById('sign-in-status').textContent = 'Signed in';
               document.getElementById('sign-in').textContent = 'Sign out';
-              //document.getElementById('account-details').textContent = "Name: " + displayName + "Email: " + email + "Photo: " + photoURL; 
+              //document.getElementById('account-details').textContent = "Name: " + displayName + "Email: " + email + "Photo: " + photoURL;
 
               //console.log(providerData);
 
@@ -125,14 +122,6 @@ function addStart(){
 </head>
 
  <body>
-
-  <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-inverse p-4">
-      <h4 class="text-white">Collapsed content</h4>
-      <span class="text-muted">Toggleable via the navbar brand.</span>
-    </div>
-  </div>
 
      <nav class="navbar navbar-fixed-top navbar-light text-black" style="background-color: #6F30A5;">
     <div class="container">
@@ -244,6 +233,8 @@ function addStart(){
 <a href="dashboard.html" button class="btn btn-lg btn-primary btn-block" name="sub">Volunteer Database</a>
 <a href="event-page.html" button class="btn btn-lg btn-primary btn-block" name="sub">Sign Up for an Event</a>
 
+<br><br><br><br><br><br><br><br><br><br>
+
 </div>
 
 
@@ -252,8 +243,3 @@ function addStart(){
 
   </body>
 </html>
-
-
-
-
-

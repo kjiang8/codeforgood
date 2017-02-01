@@ -2,104 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <meta name="description" content="">
   <meta name="author" content="">
-
-    <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <link href="css/dashboard.css" rel="stylesheet">
-
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
-
-
-<!--<script src="js/signup.js"></script> 
-not working rip, must paste directly into file
--->
-
-
-<script>
-
-
-var data = {}
-
-var config = {
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- <link href="css/dashboard.css" rel="stylesheet"> -->
+  <link href="https://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+  <script>
+  var data = {}
+  var config = {
     apiKey: "AIzaSyB9MrLpsxRzKq1VzCbA1T-6Yi6raHIxiM0",
     authDomain: "code-for-good-35ef5.firebaseapp.com",
     databaseURL: "https://code-for-good-35ef5.firebaseio.com",
     //storageBucket: "<BUCKET>.appspot.com",
     //messagingSenderId: "<SENDER_ID>",
   };
-
-firebase.initializeApp(config);
-
-var rootRef = firebase.database().ref();
-rootRef.on("value", function(snapshot){
-
+  firebase.initializeApp(config);
+  var rootRef = firebase.database().ref();
+  rootRef.on("value", function(snapshot){
     data = snapshot.val(); //data is updated every time the db changes
-
     var list = "";
-  $.each(data.Events, function(key, value){
-    list += "<option>" + key + "</option>";
-
+    $.each(data.Events, function(key, value){
+      list += "<option>" + key + "</option>";
+    });
+    //console.log(list);
+    $('#eventList').append(list);
   });
-  //console.log(list);
-
-  $('#eventList').append(list);
-
-
-});
-
-
-function addReg(){
-
-  var updates = {}
-
-  var eventType = $('#eventList').val();
-  var catType = $('#categoryList').val();
-  var hours = $('#hours').val();
-  var referral = $('#referral input:radio:checked').val();
-
-  var postData = {
-
-    position: catType,
-    hours: hours,
-    referral: referral,
-
+  function addReg(){
+    var updates = {}
+    var eventType = $('#eventList').val();
+    var catType = $('#categoryList').val();
+    var hours = $('#hours').val();
+    var referral = $('#referral input:radio:checked').val();
+    var postData = {
+      position: catType,
+      hours: hours,
+      referral: referral,
+    }
+    updates['/Volunteers/00000/events/' + eventType] = postData;
+    return firebase.database().ref().update(updates);
+    location.reload();
   }
-
-      updates['/Volunteers/00000/events/' + eventType] = postData;
-      return firebase.database().ref().update(updates);
-  location.reload();
-
-  }
-
-  
-$( function() {
+  $( function() {
     $("#datepicker").datepicker();
   } );
+  </script>
+
+  <title>Event Sign-Up</title>
+</head>
 
 
-
-</script>
-
-
+<body>
 
     <title>Event Sign-Up</title>
      <nav class="navbar navbar-fixed-top navbar-light text-black" style="background-color: #6F30A5;">
+
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -110,97 +75,99 @@ $( function() {
         </button>
         <a class="navbar-brand" href="user-home.html">Alzheimer's Association Volunteer Database</a>
       </div>
-      <div id="navbar" class="collapse navbar-collapse">
+      <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="#">Home</a></li>
           <li><a href="http://www.alz.org/manh/">About the Alzheimer's Association</a></li>
           <li><a href="#contact">Contact Us</a></li>
         </ul>
-      </div><!--/.nav-collapse -->
+      </div>
     </div>
   </nav>
 
   <div class="container">
-    <div class="form-group">
-    <h3><label for="exampleSelect1">Sign Up for an Event</label></h3>
-    <select class="form-control" id="eventList">
-      <option>Choose...</option>
-    </select>
-  </div>
+
+    <br>
+    <a href="user-home.html" button class="btn btn-lg btn-primary btn-block" name="sub">Back to User Page</a>
 
     <div class="form-group">
-    <h3><label for="exampleSelect1">Volunteer Category</label></h3>
-    <select class="form-control" id="categoryList">
-      <option>Choose...</option>
-    </select>
-  </div>
+      <h3><label for="exampleSelect1">Sign Up for an Event</label></h3>
+      <select class="form-control" id="eventList">
+        <option>Choose...</option>
+      </select>
+    </div>
+
+
 
     <div class="form-group">
-    <h3><label for="exampleInputEmail1">Hours Volunteered</label></h3>
-
-  <input type="number" name="quantity" min="1" max="100" id="hours">
-  </div>
+      <h3><label for="exampleSelect1">Volunteer Category</label></h3>
+      <select class="form-control" id="categoryList">
+        <option>Choose...</option>
+      </select>
+    </div>
 
     <div class="form-group">
-    <h3><label for="exampleInputEmail1">Date Volunteered</label></h3>
+      <h3><label for="exampleInputEmail1">Hours Volunteered</label></h3>
 
-  <input type="text" id="datepicker"/>
+      <input type="number" name="quantity" min="1" max="100" id="hours">
+    </div>
+
+    <div class="form-group">
+      <h3><label for="exampleInputEmail1">Date Volunteered</label></h3>
+
+      <input type="text" id="datepicker"/>
+    </div>
+
+
+
+    <div class="form-group" id="referral">
+      <h3>How did you hear about us?</h3>
+
+      <div class="radio">
+        <label><input type="radio" name="optradio" value="friend">From a Friend</label>
+      </div>
+
+      <div class="radio">
+        <label><input type="radio" name="optradio" value="email">Email Listing</label>
+      </div>
+
+      <div class="radio">
+        <label><input type="radio" name="optradio" value="socialmedia">Social Media</label>
+      </div>
+
+      <div class="radio">
+        <label><input type="radio" name="optradio" value="previous">Previous Event</label>
+      </div>
+
+      <div class="radio">
+        <label><input type="radio" name="optradio" value="friend">Volunteer Match</label>
+      </div>
+
+      <div class="radio">
+        <label><input type="radio" name="optradio" value="intwebsite">Alzheimer's Association Website</label>
+      </div>
+
+      <div class="radio">
+        <label><input type="radio" name="optradio" value="extwebsite">External Website</label>
+      </div>
+
+
+      <div class="radio">
+        <label>
+          <input type="radio" name="optradio" value="other">
+          <input class="form-control" type="text" value="Other..." id="example-text-input">
+        </label>
+      </div>
+    </div>
+
+
+
+    <button class="btn btn-lg btn-primary btn-block" name="sub" onClick = "addReg()">Submit</button>
+
   </div>
 
 
-
-            <div class="form-group" id="referral">
-        <h3>How did you hear about us?</h3>
-
-          <div class="radio">
-          <label><input type="radio" name="optradio" value="friend">From a Friend</label>
-          </div>
-
-          <div class="radio">
-          <label><input type="radio" name="optradio" value="email">Email Listing</label>
-          </div>
-
-          <div class="radio">
-          <label><input type="radio" name="optradio" value="socialmedia">Social Media</label>
-          </div>
-
-          <div class="radio">
-          <label><input type="radio" name="optradio" value="previous">Previous Event</label>
-          </div>
-
-          <div class="radio">
-          <label><input type="radio" name="optradio" value="friend">Volunteer Match</label>
-          </div>
-
-          <div class="radio">
-          <label><input type="radio" name="optradio" value="intwebsite">Alzheimer's Association Website</label>
-          </div>
-
-          <div class="radio">
-          <label><input type="radio" name="optradio" value="extwebsite">External Website</label>
-          </div>
-
-
-        <div class="radio">
-            <label>
-       <input type="radio" name="optradio" value="other">
-        <input class="form-control" type="text" value="Other..." id="example-text-input"></label>
-        </div>
-
-
-            
-       
-</div>
-
-
-
-  <button class="btn btn-lg btn-primary btn-block" name="sub" onClick = "addReg()">Submit</button>
-
-</div>
-
-</head>
-
- <body>
+</body>
 
 <script>
 
@@ -220,5 +187,4 @@ A.onchange = function(){
 
 </script>
 
-  </body>
 </html>
