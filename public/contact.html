@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <!-- Bootstrap core CSS -->
+  <link href="https://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- Firebase JS -->
+  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+  <!-- stylesheet -->
+  <link rel="stylesheet" href="css/stylesheet.css">
+  <!-- For the Table -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/dataTables.min.css">
+  <script type="text/javascript" language="javascript" src="js/dataTables.min.js"></script>
+  <script src="js/table.js"></script>
+  <!-- Adding category to db -->
+  <script src="js/admin.js"></script>
+  <!-- title -->
+  <title>Volunteer Database</title>
+  <!-- Navbar colors -->
+  <style>
+  nav {
+    background-color: #632a96;
+  }
+  nav a {
+    color: white;
+  }
+  .icon-bar {
+    color: white;
+    border-color: white;
+    background-color: white;
+  }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-fixed-top navbar-light text-black">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Alzheimer's Association Volunteer Database</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="http://www.alz.org/manh/">About the Alzheimer's Association</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <br><br>
+    <img src="/images/logowithchapter.jpg" width=100% height=100%></img>
+    <br><br><br><hr><br>
+    <h3>
+      For more information about the Alzeimer's Association Volunteer Program, For more information about the Alzheimer’s Association Volunteer Program, call 617-868-6718
+      or email VolunteersMANH@alz.org
+      <br><br>
+      Details about our volunteer opportunities can also be found <a href="https://www.alz.org/manh/in_my_community_10928.asp">here</a>.
+    </h3>
+    <!-- Navigation Buttons -->
+    <br>
+    <a href="user-home.html" button class="btn btn-lg btn-primary btn-block" name="sub">Back to User Page</a>
+
+  </div>
+</body>
+<!-- For Exporting Table Data -->
+<script src="js/export.js"></script>
+</html>
